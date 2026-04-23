@@ -10,14 +10,14 @@ import google.generativeai as genai
 genai.configure(api_key="AIzaSyCbr5SOHnI_1ImJon7MGRMvQGn7PV5UStI")
 
 # Load models (cached to avoid reload)
-# @st.cache_resource
+@st.cache_resource
 def load_models():
     embed_model = SentenceTransformer("all-MiniLM-L6-v2")
     llm = genai.GenerativeModel("gemini-2.5-flash-lite")
     return embed_model, llm
 
 # Load documents and FAISS index
-# @st.cache_resource
+@st.cache_resource
 def load_index(_embed_model):
     with open("job.txt", "r", encoding="utf-8") as f:
         documents = f.read().split("\n")
