@@ -7,27 +7,23 @@ import google.generativeai as genai
 # -----------------------------
 # CONFIG
 # -----------------------------
-genai.configure(api_key="AIzaSyCbr5SOHnI_1ImJon7MGRMvQGn7PV5UStI")
+genai.configure(api_key="AIzaSyCUTQbJu8e_a4YYviLMDYb5kxBZSAvTQ24")
 
-# Load models (cached to avoid reload)
-@st.cache_resource
-def load_models():
-    embed_model = SentenceTransformer("all-MiniLM-L6-v2")
-    llm = genai.GenerativeModel("gemini-2.5-flash-lite")
-    return embed_model, llm
+# load model
+model = genai.GenerativeModel("gemini-2.5-flash-lite")
+
+# embedding model
+model_embed = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Load documents and FAISS index
-@st.cache_resource
-def load_index(_embed_model):
-    with open("job.txt", "r", encoding="utf-8") as f:
-        documents = f.read().split("\n")
+file = open("job.txt", "r", encoding="utf-8")
+documents = file.read().split("\n")
+file.close()
 
-    embeddings = _embed_model.encode(documents)
 
-    index = faiss.IndexFlatL2(embeddings.shape[1])
-    index.add(np.array(embeddings))
+# convert text → vectors
+embeddings = model_embed.encode(documents)
 
-    return documents, index
 
 # -----------------------------
 # UI
@@ -37,16 +33,18 @@ st.write("Enter your query. System retrieves relevant job info and evaluates fit
 
 query = st.text_input("Enter your query")
 
+
+# create FAISS index
+index = faiss.IndexFlatL2(embeddings.shape[1])
+index.add(np.array(embeddings))
+
 # -----------------------------
 # MAIN LOGIC
 # -----------------------------
 if st.button("Analyze") and query:
 
-    embed_model, llm = load_models()
-    documents, index = load_index(embed_model)
-
     # Encode query
-    query_vec = embed_model.encode([query])
+    query_vec = model_embed.encode([query])
 
     # Search
     D, I = index.search(np.array(query_vec), k=2)
@@ -56,7 +54,7 @@ if st.button("Analyze") and query:
     # Prompt
     prompt = f"""First read the doument or text "{documents[I[0][0]]}" then search the user query "{query}". """
 
-    response = llm.generate_content(prompt)
+    response = model.generate_content(prompt)
 
     # -----------------------------
     # OUTPUT
