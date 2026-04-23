@@ -4,13 +4,10 @@ Contract Duration: 1 - 2 months (extendable)
 Engagement: Full-time contractor / freelancer
 
 Role Overview
-
 You will work closely with a healthcare domain expert to build a functional LLM-powered MVP designed for investor pitching. The goal is to rapidly prototype a healthcare-focused AI product that demonstrates clear technical feasibility, workflow logic, and user-facing value.
-
 This role suits someone who can own the entire development cycle - from clarifying requirements to delivering a working prototype - while communicating progress clearly and making iterative improvements.
 
 Key Responsibilities
-
 Translate the client’s healthcare domain guidance into a structured MVP plan and technical requirements.
 Build a lightweight but functional LLM-based prototype (chat, workflow automation, data extraction, or clinical reasoning depending on brief).
 Configure and fine-tune models using appropriate frameworks (OpenAI, Anthropic, local models, LangChain/LlamaIndex, etc.).
@@ -28,15 +25,12 @@ Comfortable working independently on a short timeline with minimal supervision.
 Understanding of healthcare workflows or regulated-domain constraints (preferred).
 
 Nice-to-Have
-
 Experience working in early-stage startups or investor-driven MVPs.
 Basic UI/UX or front-end skills (React, Next.js, Streamlit, Gradio).
 Prior work with structured medical data or ontology mapping (SNOMED, ICD, etc.).
 
 What Success Looks Like
-
 In 30 days, you deliver:
-
 A functional LLM-based demo that clearly shows the product’s core value.
 A lightweight technical pitch pack (architecture, API diagram, model reasoning).
 A stable prototype the client can use in investor meetings.
