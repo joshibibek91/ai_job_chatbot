@@ -1,6 +1,5 @@
-faiss==1.5.3
-numpy==2.4.4
-protobuf==7.34.1
-sentence_transformers==5.4.1
-streamlit==1.50.0
-streamlit==1.56.0
+streamlit==1.32.0
+numpy==1.24.4
+protobuf==4.25.3
+sentence-transformers
+faiss-cpu
